@@ -124,4 +124,8 @@ export class AppComponent {
     console.log(this.register);
   }
   widthImg = 10;
+
+  mostrar(e : string) {
+    console.log(e);
+  }
 }
