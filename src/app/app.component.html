@@ -1,27 +1,16 @@
-<!--Angular tinene un componente html que se encarga del renderizado-->
 <h1>Hola mundo</h1>
-<!--String interpolation : la forma que desde typescript se pueden pasar datos a renderizar
-  se pueden realizar metodos con los strings dentro de las llaves
-  osea es para renderizar contenido
--->
+
 <h2>{{'Hola mundo'.repeat(5)}}</h2>
 <p>3+3={{3+3}}</p>
-<!--traenmos del componente-->
 <h3>Hola soy {{name}} y tengo {{age}}</h3>
 <img src="{{img}}" alt="image" width="200px" height="200px">
-<!--Property blinding: para configurar propiedades de elementos html-->
 <h1>Propiedades</h1>
-<!--si el boton es apretable
-con los [] se pueden modificar propiedades-->
+
 <button [disabled]="btnDisabled">Enviar</button>
 <input type="text" [value]="name">
-<!--es una barra de progreso empieza desde 0 el value es su valor actual-->
 <progress max = "100" [value]="person.age"></progress>
-<!--Event Binding-->
-<!--Ejecuta eventos como metodos del component -->
 <button (click)="toggleButton()">Toggle Button</button>
 <button (click)="increaseAge()">Age ++</button>
-<!--los e osea el parametro el evento se envian como $event-->
 <div class="box" (scroll)="onScroll($event)">
   <p>
     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dignissimos, unde, doloribus ab quas nulla velit rerum harum voluptatum tempora repudiandae cupiditate! Quo cum soluta, suscipit consectetur corrupti incidunt quae placeat?
@@ -30,38 +19,29 @@ con los [] se pueden modificar propiedades-->
   </p>
 </div>
 <input type="text" (select)="seleccionado($event)">
-<!--Ng model : siempre esta al tanto de los estados de los inputs si el campo es valido o no
-  tambien con la interaccion del usuario[(ngModel)]-->
-<!--Angular forms:paquete de angular-->
+
 <h1>Ng Model</h1>
-<!--Primero aqui no reconoceria el modulo para eso habilitardo en app.module.ts-->
-<!--pais.nombre es un atributo del objeto pais ese atributo seria modificado si el usuario cambiara algo en el input-->
-<!--Se le puede coloar un nombre en el input pero colocarle de valor ngModel-->
+
 <input type="text" [(ngModel)]="pais.nombre" #nameInput="ngModel" required="" minlength="5">
 <div>
   Tu pais : {{pais.nombre}}
 </div>
 <p>
-  <!--valid se refiere a si el input pasa todos los atributos de validacion ejem required etc-->
-  <!--para ello es necesario el [(ngModel)]-->
-  Valid: {{nameInput.valid}}<!--True or False-->
+
+  Valid: {{nameInput.valid}}
 </p>
 <h1>
   *ngIf
 </h1>
-<!--si esto se cumple se mostrara el contenido-->
 <p *ngIf="!false">My Content</p>
 <input type="text" [(ngModel)]="pais.nombre" required="">
 <p *ngIf="pais.nombre==='Brasil'">Eres Brasileiro</p>
-<!--si no se muestra este bloque ejecuta el bloque  con nombre-->
 <p *ngIf="pais.nombre==='Argentina';else elseBlock">Eres Gaucho</p>
-<!--para else-->
 <ng-template #elseBlock>
   <p>Bloque de else</p>
 </ng-template>
 <h1>*ngFor</h1>
 <ul>
-  <!--como el for of-->
   <li *ngFor="let name of names">
     {{name}}
   </li>
@@ -70,11 +50,9 @@ con los [] se pueden modificar propiedades-->
   <li *ngIf="names.length===0">
     No hay nombres
   </li>
-  <!--como el for in-->
-  <!--el index renombrado como i-->
+
   <li *ngFor="let name of names;index as i">
     {{names[i]}}
-    <!--Aqui no es obligatorio colocar el evento de parametro se puede colocar otro parametro-->
     <button (click)="removeE(i)">Delete</button>
   </li>
 </ol>
@@ -111,22 +89,17 @@ add remove modif
 </div>
 <h1>Class & Style</h1>
 <input type="text" required #nameInput2="ngModel" [(ngModel)]="person.name">
-<!--Para que tenga estilos propios y dinamicos de acuerdo al estado del input-->
-<!--Osea si el input es invalido crea la clase que se le pide [class.nuevaClase]="valor boleano"-->
+
 <p class="message-error" [class.invalid]="nameInput2.invalid">El campo es requerido</p>
 <label>Nombre</label>
 <input type="text" required #nameInput3="ngModel" [(ngModel)]="person.name">
-<!--Modifica estilos es como estilos en linea pero se usa condicionales ternarias con un valor booleano-->
-<!--tambien se puede usar un valor normal como propiedad-->
-<!--ng template : tiene una restriccion y esa es que las variables #var no se pueden usar antes de su creacion
--->
+
 <p [style.font-style]="nameInput3.invalid ? 'italic':'normal'">Texto texto texto texto</p>
 <div class="styles">
   <div>
     <input type="text" [(ngModel)]="widthImg">
   </div>
   <div>
-    <!--Se puede modificar el tamaño de la imagen con diferentes valores-->
     <img [src]="person.avatar" [style.width.%]="widthImg">
   </div>
 </div>
@@ -135,7 +108,6 @@ add remove modif
 <h1>ngSwich</h1>
 <input type="text" required [(ngModel)]="person.name" #validar="ngModel">
 <textarea>{{validar.valid}}</textarea>
-<!--Que valor comparara-->
 <div [ngSwitch]="person.name">
   <p *ngSwitchCase="'nicolas'">
     la persona es nicolas
@@ -151,7 +123,6 @@ add remove modif
 
 <h1>NgClass & NgStyle</h1>
 <input type="text" required #nameInput4="ngModel" [(ngModel)]="person.name">
-<!--asi es {"clase":boleano} -> true se agrega la clase-->
 <hr class="line-error" [ngClass]="{
   'valid':nameInput4.valid,
   'invalid':nameInput4.invalid
@@ -164,7 +135,6 @@ add remove modif
     <input type="color" [(ngModel)]="box.background">
   </div>
   <div>
-    <!--Aplica todos estos estilos al elemento-->
     <div [ngStyle]="{
       'width.px' : box.width,
       'height.px' : box.height,
@@ -174,7 +144,6 @@ add remove modif
   </div>
 </div>
 <h1>Formulario</h1>
-<!--ngForm Hace un seguimiento al formulario seguiendo todas sus validaciones-->
 <form #myForm="ngForm" (ngSubmit)="onRegister()">
   <div class="input-group">
     <label for="name">Nombre</label>
@@ -191,9 +160,8 @@ add remove modif
     <input type="password" id="password" [(ngModel)]="register.password" required="" name="password">
     <p>Mensaje de error</p>
   </div>
-  <!--Cada vez que se usa botones en formularios siempre colocar el type es obligatorio
-  porque sino cualquier boton lo tomara como submit-->
-  <!--Si todo fue validado sale true sino es invalido false-->
+
   <button type="submit" [disabled]="myForm.invalid">Registrar</button>
 </form>
-<!--leer cuando salga errores en angular ya que incluso da ejemplos de como resolverlos-->
+<app-footer [res]="'marcelo oso'" (rta)="mostrar($event)">
+</app-footer>

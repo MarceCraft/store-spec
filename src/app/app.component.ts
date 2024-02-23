@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-//importamos la interfaz que creamos
 import {Product} from './product.model';
 import {Registro} from './register.model';
 
@@ -8,15 +7,11 @@ import {Registro} from './register.model';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-//variables en el componente
 export class AppComponent {
   title(title: any) {
     throw new Error('Method not implemented.');
   }
 
-  //en la carpeta assets se coloca la carpeta de imagenes
-  //aqui usamos el tipado de product de nuestra interfaz
-  //solamente se pueden iterar arrays no objetos
   products: Product[] = [
     {
       name: 'EL mejor juguete',
@@ -54,17 +49,13 @@ export class AppComponent {
   emojis:string[] = [ '😂' , '🐦', '🐳','🌮', '💚'];
   newEmoji:string="";
   newName="";
-  //para cualquier valor
   cualquier:any[] = [];
   public name = 'Nicolas';
-  //public por defecto si es private nos salta el error en nuestro html
   age = 18;
   img = "https://source.unsplash.com/random";
   btnDisabled = true;
-  //es lo mismo pero con objectos
   public person = {
     name : 'Nicolas',
-    //public por defecto si es private nos salta el error en nuestro html
     age : 18,
     avatar : "https://source.unsplash.com/random"
   }
@@ -89,12 +80,9 @@ export class AppComponent {
   increaseAge() {
     this.person.age += 2;
   }
-  //capturamos el evento
   onScroll(event:Event) {
     console.log(event);
-    //as  : convierte un objeto a otro
     const element = event.target as HTMLElement;
-    //desde la punta del elemento hasta donde se hace scroll
     console.log(element.scrollTop);
   }
   seleccionado(event:Event) {
@@ -124,4 +112,8 @@ export class AppComponent {
     console.log(this.register);
   }
   widthImg = 10;
+
+  mostrar(e : string) {
+    console.log(e);
+  }
 }
