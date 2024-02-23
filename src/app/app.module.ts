@@ -14,7 +14,6 @@ import { FooterComponent } from './components/footer/footer.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    //le decimos que necesitamos ese modulo
     FormsModule
   ],
   providers: [],
